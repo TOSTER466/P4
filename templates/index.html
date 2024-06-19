@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Service</title>
+    <script>
+        function updateParams() {
+            const methodId = document.getElementById('method_id').value;
+            const paramsDiv = document.getElementById('params');
+            paramsDiv.innerHTML = ''; // Clear previous params
+
+            if (methodId == '1') { // Vigenere Cipher
+                paramsDiv.innerHTML = `
+                    <label for="key">Key:</label>
+                    <input type="text" id="key" name="key" required><br><br>
+                `;
+            } else if (methodId == '2') { // Caesar Cipher
+                paramsDiv.innerHTML = `
+                    <label for="shift">Shift:</label>
+                    <input type="number" id="shift" name="shift" required><br><br>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('method_id').addEventListener('change', updateParams);
+            updateParams(); // Call once to set initial state
+        });
+    </script>
+</head>
+<body>
+<h1>Welcome to the Encryption Service</h1>
+<form action="/encrypt_decrypt" method="post">
+    <label for="user_login">User Login:</label>
+    <input type="text" id="user_login" name="user_login" required><br><br>
+    <label for="user_secret">User Secret:</label>
+    <input type="password" id="user_secret" name="user_secret" required><br><br>
+    <label for="method_id">Method:</label>
+    <select id="method_id" name="method_id" required>
+        {% for method in methods %}
+        <option value="{{ method.id }}">{{ method.caption }}</option>
+        {% endfor %}
+    </select><br><br>
+    <label for="text">Text:</label>
+    <input type="text" id="text" name="text" required><br><br>
+    <div id="params">
+        <!-- Parameters will be inserted here based on selected method -->
+    </div>
+    <label for="action">Action:</label>
+    <select id="action" name="action" required>
+        <option value="encrypt">Encrypt</option>
+        <option value="decrypt">Decrypt</option>
+    </select><br><br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
