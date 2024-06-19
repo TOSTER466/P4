@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Service - Result</title>
+</head>
+<body>
+<h1>Encryption Service - Result</h1>
+<p><strong>Session ID:</strong> {{ session.id }}</p>
+<p><strong>User ID:</strong> {{ session.user_id }}</p>
+<p><strong>Method ID:</strong> {{ session.method_id }}</p>
+<p><strong>Data In:</strong> {{ session.data_in }}</p>
+<p><strong>Parameters:</strong> {{ session.params }}</p>
+<p><strong>Data Out:</strong> {{ session.data_out }}</p>
+<p><strong>Status:</strong> {{ session.status }}</p>
+<p><strong>Created At:</strong> {{ session.created_at }}</p>
+<p><strong>Operation Time:</strong> {{ session.time_op }} seconds</p>
+
+<hr>
+<h2>Delete Session</h2>
+<form action="/delete_session" method="post">
+    <input type="hidden" name="session_id" value="{{ session.id }}">
+    <label for="user_secret">User Secret:</label>
+    <input type="password" id="user_secret" name="user_secret" required><br><br>
+    <button type="submit">Delete Session</button>
+
+</form>
+</body>
+</html>
