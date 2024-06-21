@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервис шифрования - Результат</title>
+</head>
+<body>
+<h1>Сервис шифрования - Результат</h1>
+<p><strong>Сессия ID :</strong> {{ session.id }}</p>
+<p><strong>Пользователь ID:</strong> {{ session.user_id }}</p>
+<p><strong>Метод ID:</strong> {{ session.method_id }}</p>
+<p><strong>Введённый текст:</strong> {{ session.data_in }}</p>
+<p><strong>Параметры:</strong> {{ session.params }}</p>
+<p><strong>Полученный текст:</strong> {{ session.data_out }}</p>
+<p><strong>Статус:</strong> {{ session.status }}</p>
+<p><strong>Создан:</strong> {{ session.created_at }}</p>
+<p><strong>Время операции:</strong> {{ session.time_op }} seconds</p>
+
+<hr>
+<h2>Сессия удаления</h2>
+<p>Введённый текст: {{ session.data_in }}</p>
+<p>Полученный текст: {{ session.data_out }}</p>
+
+{% if session_deleted %}
+<div style="color: green;">
+    Сессия успешно удалена.
+</div>
+{% endif %}
+
+<form action="/delete_session/{{ session.id }}" method="post">
+    <label for="user_secret">Введите ваш секрет:</label>
+    <input type="password" id="user_secret" name="user_secret" required>
+    <button type="submit">Удалить сессию</button>
+</form>
+
+{% if password_incorrect %}
+<div style="color: red;">
+    Секрет неверен. Пожалуйста, попробуйте снова.
+</div>
+{% endif %}
+</body>
+</html>

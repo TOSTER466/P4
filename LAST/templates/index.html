@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Service</title>
+    <script>
+        function updateParams() {
+            const methodId = document.getElementById('method_id').value;
+            const paramsDiv = document.getElementById('params');
+            paramsDiv.innerHTML = ''; // Clear previous params
+
+            if (methodId == '1') { // Метод Виженера
+                paramsDiv.innerHTML = `
+                    <label for="key">Ключ:</label>
+                    <input type="text" id="key" name="key" required><br><br>
+                `;
+            } else if (methodId == '2') { // Метод Цезаря
+                paramsDiv.innerHTML = `
+                    <label for="shift">Сдвиг:</label>
+                    <input type="number" id="shift" name="shift" required><br><br>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('method_id').addEventListener('change', updateParams);
+            updateParams(); // Call once to set initial state
+        });
+    </script>
+</head>
+<body>
+<h1>Добро пожаловть на сервис шифрования</h1>
+<form action="/encrypt_decrypt" method="post">
+    <label for="user_login">Логин пользователя:</label>
+    <input type="text" id="user_login" name="user_login" required><br><br>
+    <label for="user_secret">Секрет пользователя:</label>
+    <input type="password" id="user_secret" name="user_secret" required><br><br>
+    <label for="method_id">Метод:</label>
+    <select id="method_id" name="method_id" required>
+        {% for method in methods %}
+        <option value="{{ method.id }}">{{ method.caption }}</option>
+        {% endfor %}
+    </select><br><br>
+    <label for="text">Текст:</label>
+    <input type="text" id="text" name="text" required><br><br>
+    <div id="params">
+        <!-- Parameters will be inserted here based on selected method -->
+    </div>
+    <label for="action">Действие:</label>
+    <select id="action" name="action" required>
+        <option value="encrypt">Шифрования</option>
+        <option value="decrypt">Дешифрования </option>
+    </select><br><br>
+    <button type="submit">Выполнить</button>
+</form>
+</body>
+</html>
