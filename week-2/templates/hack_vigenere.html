@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Взлом метода Виженера</title>
+</head>
+<body>
+<h1>Взлом метода Виженера</h1>
+<form action="{{ url_for('hack_vigenere') }}" method="POST">
+    <label for="user_id">Пользователь:</label>
+    <select id="user_id" name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user }}">{{ user }}</option>
+        {% endfor %}
+    </select><br>
+    <label for="data_in">Вводимый текст:</label>
+    <textarea id="data_in" name="data_in" required></textarea><br>
+    <label for="keyword">Ключевое слово:</label>
+    <input type="text" id="keyword" name="keyword" required><br>
+    <button type="submit">Взломать</button>
+</form>
+<a href="{{ url_for('home') }}">Вернуться назад</a>
+</body>
+</html>

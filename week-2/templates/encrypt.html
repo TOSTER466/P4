@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Шифрование и Дешифрование</title>
+</head>
+<body>
+<h1>{{ method.caption }} - {{ 'Decrypt' if request.args.get('action') == 'decrypt' else 'Encrypt' }}</h1>
+<form action="{{ url_for('encrypt') }}" method="POST">
+    <input type="hidden" name="method_id" value="{{ method.id }}">
+    <input type="hidden" name="action" value="{{ request.args.get('action') }}">
+    <label for="user_id">Пользователь:</label>
+    <select id="user_id" name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user }}">{{ user }}</option>
+        {% endfor %}
+    </select><br>
+    <label for="data_in">Вводимый текст:</label>
+    <textarea id="data_in" name="data_in" required></textarea><br>
+    {% if method.caption == 'Цезарь' %}
+    <label for="shift">Сдвиг:</label>
+    <input type="number" id="shift" name="shift" required><br>
+    {% elif method.caption == 'Виженер' %}
+    <label for="key">Ключ:</label>
+    <input type="text" id="key" name="key" required><br>
+    {% endif %}
+    <button type="submit">{{ 'Расшифровать' if request.args.get('action') == 'decrypt' else 'Шифровать' }}</button>
+</form>
+<a href="{{ url_for('get_methods') }}">Вернуться назад</a>
+</body>
+</html>

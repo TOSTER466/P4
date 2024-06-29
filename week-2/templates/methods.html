@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы</title>
+</head>
+<body>
+<h1>Методы</h1>
+<ul>
+    {% for method in methods %}
+    <li>
+        <a href="{{ url_for('encrypt_form', method_id=method.id, action='encrypt') }}">{{ method.caption }} (Encrypt)</a>
+        |
+        <a href="{{ url_for('encrypt_form', method_id=method.id, action='decrypt') }}">{{ method.caption }} (Decrypt)</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('home') }}">Вернуться назад</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сессии</title>
+</head>
+<body>
+<h1>Сессии</h1>
+<ul>
+    {% for session in sessions %}
+    <li>
+        <a href="{{ url_for('get_session', session_id=session.id) }}">Session ID: {{ session.id }}</a> - User ID: {{ session.user_id }}
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результыты взлома</title>
+</head>
+<body>
+<h1>Результыты взлома</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Ключ/Сдвиг</th>
+        <th>Расшифрованный текст</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for result in results %}
+    <tr>
+        <td>{{ result.key if result.key else result.shift }}</td>
+        <td>{{ result.decrypted_text }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('home') }}">Вернуться назад</a>
+</body>
+</html>

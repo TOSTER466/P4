@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сессия</title>
+</head>
+<body>
+<h1>ID Сессии: {{ session.id }}</h1>
+<p>ID Пользователя: {{ session.user_id }}</p>
+<p>ID метода: {{ session.method_id }}</p>
+<p>Введённый текст: {{ session.data_in }}</p>
+<p>Параметры: {{ session.params }}</p>
+<p>Полученный результат: {{ session.data_out }}</p>
+<p>Статус: {{ session.status }}</p>
+<p>Создано: {{ session.created_at }}</p>
+<p>Время операции: {{ session.time_op }}</p>
+<form action="{{ url_for('delete_session_form', session_id=session.id) }}" method="POST">
+    <label for="secret">Секрет:</label>
+    <input type="text" id="secret" name="secret" required>
+    <button type="submit">Удалить сессию</button>
+</form>
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+<a href="{{ url_for('get_sessions') }}">Вернуться назад</a>
+</body>
+</html>
