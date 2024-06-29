@@ -1,7 +1,13 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import time
 import itertools
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cipher.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'

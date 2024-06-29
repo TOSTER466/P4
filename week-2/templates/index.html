@@ -7,6 +7,9 @@
 <body>
 <h1>Добро пожаловать на сервис шифрования и дешифрования!</h1>
 <ul>
+    <li><a href="{{ url_for('add_user_form') }}">Добавить пользователей</a></li>
+    <li><a href="{{ url_for('list_users') }}">Список пользователей</a></li>
+    <li><a href="{{ url_for('get_sessions') }}">Просмотреть сессии</a></li>
     <li><a href="{{ url_for('get_methods') }}">Просмотреть методы</a></li>
     <li><a href="{{ url_for('hack_caesar_form') }}">Взлом метода Цезаря</a></li>
     <li><a href="{{ url_for('hack_vigenere_form') }}">Взлом метода Виженера</a></li>
